@@ -176,7 +176,7 @@ Begin
 
     if idFTP.Connected then
     try
-      fMain.Save_Log(' FTP : Соединение установленно');
+      fMain.Save_Log(' FTP : РЎРѕРµРґРёРЅРµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕ');
 
       if idFTP.Size(Ftp_file) > 0 then
         idFTP.Delete(Ftp_file);
@@ -185,7 +185,7 @@ Begin
       result := true;
     except
       on E : Exception do
-        fMain.Save_Log('!!! FTP : Ошибка скачивания файла: ' + E.Message);
+        fMain.Save_Log('!!! FTP : РћС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ С„Р°Р№Р»Р°: ' + E.Message);
     end;
 
 
@@ -202,7 +202,7 @@ begin
  SPath                         := ExtractFilePath( Application.ExeName );
   SFileName                     := ExtractFileName( Application.ExeName );
 
-  fMain.Caption := 'Аделаида Uploader [ '+GetMyVersion +' ]';
+  fMain.Caption := 'РђРґРµР»Р°РёРґР° Uploader [ '+GetMyVersion +' ]';
   fMain.ftp_localpath_e.Text := SPath+'Adelaida.exe';
 
   fMain.adelaida_version_l.Caption :=  GetFileVersion(fMain.ftp_localpath_e.Text);
@@ -227,7 +227,7 @@ begin
   SPath                         := ExtractFilePath( Application.ExeName );
   SFileName                     := ExtractFileName( Application.ExeName );
 
-  fMain.Caption := 'Аделаида Uploader [ '+GetMyVersion +' ]';
+  fMain.Caption := 'РђРґРµР»Р°РёРґР° Uploader [ '+GetMyVersion +' ]';
   fMain.ftp_localpath_e.Text := SPath+'Adelaida.exe';
 
   fMain.adelaida_version_l.Caption :=  GetFileVersion(fMain.ftp_localpath_e.Text);
@@ -316,21 +316,21 @@ Begin
       fmail_login := amail_login;
       fmail_pass  := amail_pass;
 
-      fmain.Save_Log('Выгружаем файл: ' + fFtp_file + '...');
+      fmain.Save_Log('Р’С‹РіСЂСѓР¶Р°РµРј С„Р°Р№Р»: ' + fFtp_file + '...');
 
       Ftp :=  TFtp.Create;
       try
 
         if Ftp.FTP_Upload( fFtp_host, fFtp_port, fFtp_file, fLocal_file,  fFtp_user, fFtp_pass) then
         Begin
-          fMain.Save_Log(' FTP : Файл ''' + fFtp_file + ''' успешно загружен.');
+          fMain.Save_Log(' FTP : Р¤Р°Р№Р» ''' + fFtp_file + ''' СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅ.');
 
           FAction     := 'add_new_fileversion';
           FOperation  := URLEncode( Base64Encode(fFtp_file+'||'+fFtp_user+'||'+ Base64Encode(fFtp_pass)+'||'+fFtp_host+'||'+fFtp_port+'||'+
                                     fmail_host+'||'+fmail_port+'||'+ fmail_login+'||'+Base64Encode(fmail_pass)));
           FUrl        := Host + 'api.php?action=' + FAction + '&key=' + fFtp_file + '&operation=' + FOperation;
 
-          fMain.Save_Log(' HTTPS : Отправляем изменение в базу данных');
+          fMain.Save_Log(' HTTPS : РћС‚РїСЂР°РІР»СЏРµРј РёР·РјРµРЅРµРЅРёРµ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…');
           FStream   := TMemoryStream.Create;
           HTTP_R    := TNetHTTPRequest.Create(nil);
           HTTP_C    := TNetHTTPClient.Create(nil);
@@ -353,7 +353,7 @@ Begin
              Resp  := HTTP_R.Execute();
             except on E : Exception do
               Begin
-                fMain.Save_Log(E.ClassName+' HTTPS : [ ' + inttostr(FIndex) + ' ] поднята ошибка, с сообщением : '+E.Message);
+                fMain.Save_Log(E.ClassName+' HTTPS : [ ' + inttostr(FIndex) + ' ] РїРѕРґРЅСЏС‚Р° РѕС€РёР±РєР°, СЃ СЃРѕРѕР±С‰РµРЅРёРµРј : '+E.Message);
                 exit;
               End;
             end;
@@ -391,7 +391,7 @@ Begin
         End
         else
         Begin
-          fmain.Save_Log(' HTTPS : Ошибка отправки изменений в базу данных' );
+          fmain.Save_Log(' HTTPS : РћС€РёР±РєР° РѕС‚РїСЂР°РІРєРё РёР·РјРµРЅРµРЅРёР№ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…' );
         End;
       finally
         FreeAndNil(Ftp);
@@ -417,7 +417,7 @@ Begin
                 procedure
                 begin
 
-                   fMain.Save_Log('Все задачи add_new_fileversion завершены') ;
+                   fMain.Save_Log('Р’СЃРµ Р·Р°РґР°С‡Рё add_new_fileversion Р·Р°РІРµСЂС€РµРЅС‹') ;
 
                    if FAction = 'add_new_fileversion' then
                    Begin
