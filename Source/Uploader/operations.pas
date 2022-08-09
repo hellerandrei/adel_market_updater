@@ -36,8 +36,8 @@ End;
 function GetMyVersion:string;
 type
   TVerInfo=packed record
-    Nevazhno: array[0..47] of byte; // ненужные нам 48 байт
-    Minor,Major,Build,Release: word; // а тут версия
+    Nevazhno: array[0..47] of byte; // РЅРµРЅСѓР¶РЅС‹Рµ РЅР°Рј 48 Р±Р°Р№С‚
+    Minor,Major,Build,Release: word; // Р° С‚СѓС‚ РІРµСЂСЃРёСЏ
   end;
 var
   s:TResourceStream;
@@ -45,10 +45,10 @@ var
 begin
   result:='';
   try
-    s:=TResourceStream.Create(HInstance,'#1',RT_VERSION); // достаём ресурс
+    s:=TResourceStream.Create(HInstance,'#1',RT_VERSION); // РґРѕСЃС‚Р°С‘Рј СЂРµСЃСѓСЂСЃ
     if s.Size>0 then begin
-      s.Read(v,SizeOf(v)); // читаем нужные нам байты
-      result:=IntToStr(v.Major)+'.'+IntToStr(v.Minor)+'.'+ // вот и версия...
+      s.Read(v,SizeOf(v)); // С‡РёС‚Р°РµРј РЅСѓР¶РЅС‹Рµ РЅР°Рј Р±Р°Р№С‚С‹
+      result:=IntToStr(v.Major)+'.'+IntToStr(v.Minor)+'.'+ // РІРѕС‚ Рё РІРµСЂСЃРёСЏ...
               IntToStr(v.Release)+'.'+IntToStr(v.Build);
     end;
   s.Free;
