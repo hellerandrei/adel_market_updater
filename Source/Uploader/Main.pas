@@ -12,8 +12,6 @@ uses
   System.Net.HttpClient,
   System.Net.HttpClientComponent,
   System.Net.URLClient,
-   // Base 64
-  System.NetEncoding,
 
   Vcl.ComCtrls,
 
